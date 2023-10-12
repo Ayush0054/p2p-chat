@@ -11,7 +11,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Landing />} />
-        {isAuthenticated && <Route path="/chat" element={<Chat />} />}
+        {/* {isAuthenticated && <Route path="/chat" element={<Chat />} />} */}
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </>
   );

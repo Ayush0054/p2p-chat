@@ -10,7 +10,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [profilePic, setProfilePic] = useState("");
 
-  const handleSignup = async () => {
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       const config = {
         headers: {
@@ -18,7 +19,7 @@ const Signup = () => {
         },
       };
       const response = await axios.post(
-        "/api/register",
+        "http://localhost:8000/api/register",
         {
           email,
           name,
@@ -36,7 +37,7 @@ const Signup = () => {
   };
 
   return (
-    <form className=" grid gap-10">
+    <form className=" grid gap-10" onSubmit={handleSignup}>
       <h2>Signup</h2>
       <Input
         type="email"
@@ -62,7 +63,7 @@ const Signup = () => {
         value={profilePic}
         onChange={(e) => setProfilePic(e.target.value)}
       />
-      <Button onClick={handleSignup}>Signup</Button>
+      <Button>Signup</Button>
     </form>
   );
 };

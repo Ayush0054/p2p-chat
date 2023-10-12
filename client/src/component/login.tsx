@@ -8,9 +8,22 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
-      const response = await axios.post("/api/login", { email, password });
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const response = await axios.post(
+        "http://localhost:8000/api/login",
+        {
+          email,
+          password,
+        },
+        config
+      );
       console.log(response.data);
       // You can handle successful login here
     } catch (error) {
@@ -20,7 +33,7 @@ const Login = () => {
   };
 
   return (
-    <div className=" grid gap-10">
+    <form className=" grid gap-10" onSubmit={handleLogin}>
       <h2>Login</h2>
       <Input
         type="email"
@@ -34,8 +47,8 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button onClick={handleLogin}>Login</Button>
-    </div>
+      <Button>Login</Button>
+    </form>
   );
 };
 
