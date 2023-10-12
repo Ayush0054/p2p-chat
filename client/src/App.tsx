@@ -1,10 +1,18 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Button } from "./components/ui/button";
+
+import Chat from "./pages/chat";
+import Landing from "./pages/landing";
+import ProtectedRoute from "./utils/protectedRoute";
 
 function App() {
+  const isAuthenticated = localStorage.getItem("authToken");
   return (
     <>
-      <Button>Click me</Button>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        {isAuthenticated && <Route path="/chat" element={<Chat />} />}
+      </Routes>
     </>
   );
 }
