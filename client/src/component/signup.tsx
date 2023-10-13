@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +31,7 @@ const Signup = () => {
         config
       );
       console.log(response.data);
+      navigate("/chat");
       // You can handle successful signup here
     } catch (error) {
       console.error(error);

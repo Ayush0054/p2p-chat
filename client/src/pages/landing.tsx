@@ -1,9 +1,18 @@
 import Signup from "@/component/signup";
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Login from "@/component/login";
+import { useNavigate } from "react-router-dom";
 
 function Landing() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("token") as string);
+
+    if (user) {
+      navigate("/chat");
+    }
+  }, [navigate]);
   return (
     <div>
       <div className=" m-10 mb-20">
