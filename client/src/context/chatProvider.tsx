@@ -10,21 +10,21 @@ import { useNavigate } from "react-router-dom";
 interface ChatContextinterface {
   user: any;
   setUser: React.Dispatch<React.SetStateAction<string>> | undefined;
-  search: boolean;
-  setSearch: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedChat: any;
-  setSelectedChat: React.Dispatch<React.SetStateAction<any>>;
-  chats: any;
-  setChats: React.Dispatch<React.SetStateAction<any>>;
+  // search: boolean;
+  // setSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  // selectedChat: any;
+  // setSelectedChat: React.Dispatch<React.SetStateAction<any>>;
+  // chats: any;
+  // setChats: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const defaultState = {
   user: "",
   setUser: (user: "") => {},
-  selectedChat: null,
-  setSelectedChat: (selectedChat) => {},
-  chats: [],
-  setChats: (chats) => {},
+  // selectedChat: null,
+  // setSelectedChat: (selectedChat) => {},
+  // chats: [],
+  // setChats: (chats) => {},
 } as ChatContextinterface;
 
 type ChildProps = {
@@ -36,21 +36,21 @@ const ChatContext = createContext(defaultState);
 
 const ChatProvider = ({ children }: ChildProps) => {
   const [user, setUser] = useState<string>(defaultState.user);
-  const [search, setSearch] = useState<boolean>(defaultState.search);
-  const [selectedChat, setSelectedChat] = useState<any>(
-    defaultState.selectedChat
-  );
-  const [chats, setChats] = useState<any>(defaultState.chats);
+  // const [search, setSearch] = useState<boolean>(defaultState.search);
+  // const [selectedChat, setSelectedChat] = useState<any>(
+  //   defaultState.selectedChat
+  // );
+  // const [chats, setChats] = useState<any>(defaultState.chats);
 
   const values = {
     user,
     setUser,
-    search,
-    setSearch,
-    selectedChat,
-    setSelectedChat,
-    chats,
-    setChats,
+    // search,
+    // setSearch,
+    // selectedChat,
+    // setSelectedChat,
+    // chats,
+    // setChats,
   };
   const navigate = useNavigate();
 

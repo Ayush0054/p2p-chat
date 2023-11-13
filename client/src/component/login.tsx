@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useState } from "react";
 import firebase from "@/lib/firebase";
 import { Input } from "@/components/ui/input";
@@ -26,15 +28,22 @@ const Login = () => {
       // console.log(userCredential.user.multiFactor.user.photoURL);
       axios.post("http://localhost:8000/api/login", { idToken: idToken });
       //@ts-ignore
-      console.log(userCredential.user);
+      console.log(userCredential.user.multiFactor.user.uid);
       const Tok = {
         idToken: idToken,
+        //@ts-ignore
         name: await userCredential.user.multiFactor.user.displayName,
+        //@ts-ignore
         email: await userCredential.user.multiFactor.user.email,
+        //@ts-ignore
+
         photoURL: await userCredential.user.multiFactor.user.photoURL,
+        //@ts-ignore
+        uId: await userCredential.user.multiFactor.user.uid,
       };
       localStorage.setItem("token", JSON.stringify(Tok));
       navigate("/chat");
+      window.location.reload();
       // You can handle successful login here
     } catch (error) {
       console.error(error);

@@ -3,19 +3,26 @@ const admin = require("../firebase/index.js");
 function authMiddleware(request, response, next) {
   const headerToken = request.headers.authorization;
   if (!headerToken) {
-    return response.send({ message: "No token provided" }).status(401);
+    return response.status(401).json({ message: "No token provided" });
   }
 
   if (headerToken && headerToken.split(" ")[0] !== "Bearer") {
-    response.send({ message: "Invalid token" }).status(401);
+    return response.status(401).json({ message: "Invalid token" });
   }
 
   const token = headerToken.split(" ")[1];
-  firebase
+
+  admin
     .auth()
     .verifyIdToken(token)
-    .then(() => next())
-    .catch(() => response.send({ message: "Could not authorize" }).status(403));
+    .then((decodedToken) => {
+      // You can access user information in decodedToken
+      request.user = decodedToken;
+      console.log(token);
+      next();
+    })
+    .catch((error) => {
+      return response.status(403).json({ message: "Could not authorize" });
+    });
 }
-
 module.exports = authMiddleware;
